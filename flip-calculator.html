@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Flip Calculator | ENESMA Realty</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"><style>:root{--blk:#000007;--wht:#FBFBFB;--gold:linear-gradient(135deg,#EAD59E,#D5BE87);--g1:#EAD59E;--g2:#D5BE87;--red:linear-gradient(135deg,#EF0207,#9A0007);--r1:#EF0207;--mut:#8a8a93;--line:#1d1d27;--card:#0c0c14;--fld:#15151f}
+*{box-sizing:border-box}html,body{margin:0;background:var(--blk)}
+body{color:var(--wht);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.35}
+.wrap{max-width:1120px;margin:0 auto;padding:26px 20px 22px}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--g1);margin:0 0 6px;text-align:center}
+h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:36px;line-height:1.05;margin:0;text-align:center}
+.sub{color:#c8c8cf;margin:8px auto 18px;font-size:14px;text-align:center;max-width:620px}
+.lay{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;align-items:start}
+.col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;min-width:0}
+.card h2{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--g1);margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card h2 span{font-size:12px;letter-spacing:0;text-transform:none;color:var(--mut);font-weight:500}.card h2 span b{color:var(--wht);font-weight:600}
+.f{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px 10px;align-items:end}
+label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--mut);font-weight:500;min-width:0}
+label>.t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.box{position:relative;display:flex;align-items:center}
+.box i{position:absolute;font-style:normal;color:var(--mut);font-size:13px;pointer-events:none}.box i.pre{left:10px}.box i.suf{right:10px}
+input,select{width:100%;background:var(--fld);border:1px solid #262633;color:var(--wht);border-radius:9px;padding:8px 10px;font:500 14px Inter,system-ui,sans-serif;outline:none;-moz-appearance:textfield}
+select{appearance:none;cursor:pointer}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.box.d input{padding-left:21px}.box.p input{padding-right:30px}
+input:focus,select:focus{border-color:var(--g2)}input:disabled{opacity:.45}
+.calc{font-size:11px;line-height:14px;height:14px;color:var(--g1);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.calc em{font-style:normal;color:var(--mut);font-weight:500}
+.res{border-color:#4a4330;padding:18px 18px 16px}
+.top{text-align:center}.top .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.big{font-family:"Playfair Display",Georgia,serif;font-size:48px;font-weight:600;line-height:1.1;margin:4px 0 2px;background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.big.neg{background:var(--red);-webkit-background-clip:text;background-clip:text}
+.top .note{font-size:12px;color:#c8c8cf}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0 4px}
+.kpi{background:var(--fld);border:1px solid #262633;border-radius:10px;padding:9px 11px;min-width:0}
+.kpi .k{font-size:11px;color:var(--mut);font-weight:500}.kpi .v{font-size:18px;font-weight:700;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kpi .s{font-size:10.5px;color:var(--mut)}
+.neg-t{color:var(--r1)!important}
+.stack{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--fld);margin:14px 0 8px}.stack div{height:100%;transition:width .3s}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;color:#c8c8cf}.legend span{display:inline-flex;align-items:center;gap:5px}.legend i{width:9px;height:9px;border-radius:3px;display:inline-block}
+.tbl{font-size:12.5px;color:#c8c8cf;margin-top:12px}
+.tbl div{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px solid var(--line)}
+.tbl div span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl .h{color:var(--wht);font-weight:600}.tbl .tot{color:var(--wht);font-weight:700;font-size:14px;border:0;padding-top:8px}
+.tog{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;font-size:13px;color:var(--wht);font-weight:600}
+.tog small{display:block;color:var(--mut);font-weight:500;font-size:11.5px;margin-top:2px}
+.sw{position:relative;width:44px;height:24px;flex:none}.sw input{opacity:0;position:absolute;inset:0;margin:0;cursor:pointer;z-index:1}
+.sw b{position:absolute;inset:0;border-radius:99px;background:#262633;transition:.2s}.sw b:after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:var(--wht);transition:.2s}
+.sw input:checked+b{background:var(--gold)}.sw input:checked+b:after{left:23px;background:var(--blk)}
+.sw input:focus-visible+b{outline:2px solid var(--g1);outline-offset:2px}
+.seg{display:flex;background:var(--fld);border:1px solid #262633;border-radius:9px;padding:2px}.seg button{flex:1;background:none;border:0;color:var(--mut);font:600 13px Inter,sans-serif;padding:6px 0;border-radius:7px;cursor:pointer}.seg button.on{background:var(--gold);color:var(--blk)}
+.fine{color:#7a7a84;font-size:11px;line-height:1.5;margin:14px auto 0;text-align:center;max-width:820px}.fine b{color:#a6a6ae;font-weight:600}
+@media(max-width:760px){.wrap{padding:20px 12px 16px}.lay{grid-template-columns:1fr}.f{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:30px}.big{font-size:42px}}
+</style></head><body><div class="wrap" id="wrap">
+<p class="eyebrow">ENESMA Realty · Fix &amp; Flip</p><h1>Flip Calculator</h1><p class="sub">Estimate the profit on a fix-and-flip. Results update as you type; blank fields count as $0.</p>
+<div class="lay"><div class="col" id="cards"></div><div class="card res" id="res"></div></div>
+<p class="fine"><b>Disclosure:</b> This calculator provides an estimate only, for informational purposes. It is not financial, tax, legal or lending advice and does not guarantee results. Actual figures will vary. Please consult your ENESMA agent before relying on these numbers.</p></div><script>const D={arv:900000,price:600000,repairs:85000,months:6,loanPct:100,rate:9,points:2,rehabRate:0,buyClose:1,buyComm:1.5,taxCredit:0,taxRate:1.25,ins:0.17,misc:0,mkt:0,listComm:1.5,sellComm:2,sellClose:1,credits:0,sellMisc:0};
+const V=Object.assign({},D);
+const CARDS=[["The deal",[["arv","Sale price (ARV)","d"],["price","Purchase price","d"],["repairs","Rehab / repairs","d"],["months","Holding period","m"]]],
+["Financing",[["loanPct","Loan-to-purchase","p"],["rate","Interest rate (annual)","p"],["points","Points &amp; loan closing","p"],["rehabRate","Rehab loan rate","p"]]],
+["Buying costs",[["buyClose","Escrow / title / misc","p"],["buyComm","Buyer's agent comm.","p"],["taxCredit","Tax proration","d"]]],
+["Holding costs",[["taxRate","Property tax (annual)","p"],["ins","Insurance","p"],["misc","Misc fees","d"],["mkt","Marketing / staging","d"]]],
+["Selling costs",[["listComm","Listing commission","p"],["sellComm","Buyer's agent comm.","p"],["sellClose","Escrow / title / misc","p"],["credits","Buyer credits","d"],["sellMisc","Misc selling fees","d"]]]];
+const n=v=>{v=parseFloat(v);return isFinite(v)?v:0};
+const $=v=>(v<-.5?"−$":"$")+Math.abs(Math.round(v)).toLocaleString("en-US");
+const pc=(v,dp=1)=>isFinite(v)?(v<0?"−":"")+Math.abs(v*100).toFixed(dp)+"%":"—";
+function calc(){const g=k=>n(V[k]),r={};
+ const arv=g("arv"),price=g("price"),rep=g("repairs"),mo=Math.max(0,g("months")),lp=Math.min(100,Math.max(0,g("loanPct")))/100;
+ r.loan=price*lp;r.down=price*(1-lp);r.points=arv*g("points")/100;r.taxCredit=g("taxCredit");
+ r.buyClose=price*g("buyClose")/100;r.buyComm=price*g("buyComm")/100;r.rep=rep;
+ r.int=r.loan*g("rate")/100*mo/12;r.rehabInt=rep*g("rehabRate")/100*mo/12;r.tax=price*g("taxRate")/100*mo/12;r.ins=price*g("ins")/100;
+ r.misc=g("misc");r.mkt=g("mkt");r.listComm=arv*g("listComm")/100;r.sellComm=arv*g("sellComm")/100;r.sellClose=arv*g("sellClose")/100;
+ r.credits=g("credits");r.sellMisc=g("sellMisc");
+ r.buying=r.points+r.taxCredit+r.buyClose+r.buyComm;r.holding=r.int+r.rehabInt+r.tax+r.ins+r.misc+r.mkt;
+ r.selling=r.listComm+r.sellComm+r.sellClose+r.credits+r.sellMisc;r.project=price+r.buying+rep+r.holding;r.net=arv-r.project-r.selling;
+ r.cash=r.down+r.points+r.taxCredit+r.buyClose+r.buyComm+rep+r.int+r.misc;
+ r.coc=r.cash>0?r.net/r.cash:NaN;r.roi=r.project>0?r.net/r.project:NaN;r.mao=arv*.7-rep;r.arv=arv;r.price=price;r.mo=mo;return r}
+const MO=r=>+r.mo.toFixed(2)+" mo",OP="of price",OS="of sale";
+const sub={arv:()=>"<em>after repairs</em>",price:()=>"<em>contract price</em>",repairs:()=>"<em>rehab budget</em>",months:()=>"<em>to finish &amp; sell</em>",
+ loanPct:r=>`${$(r.loan)} <em>· down ${$(r.down)}</em>`,rate:r=>`${$(r.int)} <em>· ${MO(r)}</em>`,points:r=>`${$(r.points)} <em>· ${OS}</em>`,rehabRate:r=>`${$(r.rehabInt)} <em>· 0% = cash</em>`,
+ buyClose:r=>`${$(r.buyClose)} <em>· ${OP}</em>`,buyComm:r=>`${$(r.buyComm)} <em>· ${OP}</em>`,taxCredit:()=>"<em>owed at purchase</em>",
+ taxRate:r=>`${$(r.tax)} <em>· ${MO(r)}</em>`,ins:r=>`${$(r.ins)} <em>· ${OP}</em>`,misc:()=>"<em>utilities, permits</em>",mkt:()=>"<em>photos, ads</em>",
+ listComm:r=>`${$(r.listComm)} <em>· ${OS}</em>`,sellComm:r=>`${$(r.sellComm)} <em>· ${OS}</em>`,sellClose:r=>`${$(r.sellClose)} <em>· ${OS}</em>`,credits:()=>"<em>repairs/closing</em>",sellMisc:()=>"<em>other fees</em>"};
+function field(k,l,t){const a=t==="d"?`<i class="pre">$</i>`:t==="p"?`<i class="suf">%</i>`:`<i class="suf">mo</i>`;
+ return `<label><span class="t">${l}</span><span class="box ${t==="d"?"d":"p"}">${a}<input type="number" step="any" min="0" inputmode="decimal" value="${V[k]}" placeholder="0" data-k="${k}" aria-label="${l.replace(/&amp;/g,"&")}"></span><span class="calc" id="c_${k}"></span></label>`}
+cards.innerHTML=CARDS.map((c,i)=>`<div class="card"><h2>${c[0]}<span id="t${i}"></span></h2><div class="f">${c[1].map(f=>field(...f)).join("")}</div></div>`).join("");
+document.querySelectorAll("input[data-k]").forEach(e=>e.addEventListener("input",()=>{V[e.dataset.k]=e.value;upd()}));
+const COL={price:"#5a5a66",buying:"#8a8a93",rep:"#3b3b47",holding:"#b9b2a0",selling:"#6f6a5c"};
+function upd(){const r=calc(),neg=r.net<0,cls=v=>v<0?"neg-t":"";
+ for(const k in sub){const el=document.getElementById("c_"+k);if(el)el.innerHTML=sub[k](r)}
+ t0.innerHTML=`Spread <b>${$(r.arv-r.price-r.rep)}</b>`;t1.innerHTML=`Interest <b>${$(r.int+r.rehabInt)}</b>`;t2.innerHTML=`Total <b>${$(r.buying)}</b>`;t3.innerHTML=`Total <b>${$(r.holding)}</b>`;t4.innerHTML=`Total <b>${$(r.selling)}</b>`;
+ const tot=Math.max(1,r.price+r.buying+r.rep+r.holding+r.selling+Math.max(0,r.net)),w=v=>Math.max(0,v)/tot*100;
+ const seg=[["Purchase",r.price,COL.price],["Buying",r.buying,COL.buying],["Rehab",r.rep,COL.rep],["Holding",r.holding,COL.holding],["Selling",r.selling,COL.selling],["Profit",Math.max(0,r.net),"var(--gold)"]];
+ res.innerHTML=`<div class="top"><div class="k">Estimated net profit</div><div class="big ${neg?"neg":""}" id="out">${$(r.net)}</div><div class="note">${neg?"This deal loses money with these numbers.":`On a ${$(r.arv)} sale after ${+r.mo.toFixed(2)} months`}</div></div>
+ <div class="kpis"><div class="kpi"><div class="k">Cash needed</div><div class="v">${$(r.cash)}</div><div class="s">Out of pocket</div></div>
+ <div class="kpi"><div class="k">Cash-on-cash</div><div class="v ${cls(r.coc)}">${pc(r.coc,0)}</div><div class="s">Profit ÷ cash needed</div></div>
+ <div class="kpi"><div class="k">ROI on total cost</div><div class="v ${cls(r.roi)}">${pc(r.roi)}</div><div class="s">Profit ÷ all-in cost</div></div>
+ <div class="kpi"><div class="k">70% rule max offer</div><div class="v">${$(r.mao)}</div><div class="s ${r.price>r.mao?"neg-t":""}">${r.price<=r.mao?$(r.mao-r.price)+" under guideline":$(r.price-r.mao)+" over guideline"}</div></div></div>
+ <div class="stack">${seg.map(s=>`<div style="width:${w(s[1])}%;background:${s[2]}"></div>`).join("")}</div>
+ <div class="legend">${seg.map(s=>`<span><i style="background:${s[2]}"></i>${s[0]} ${$(s[1])}</span>`).join("")}</div>
+ <div class="tbl"><div class="h"><span>Sale price (ARV)</span><span>${$(r.arv)}</span></div>
+ <div><span>Purchase price</span><span>−${$(r.price)}</span></div><div><span>Buying costs (points, escrow, commission, tax)</span><span>−${$(r.buying)}</span></div>
+ <div><span>Rehab / repairs</span><span>−${$(r.rep)}</span></div><div><span>Holding (interest, taxes, insurance, misc)</span><span>−${$(r.holding)}</span></div>
+ <div><span>Selling (commissions, escrow, credits)</span><span>−${$(r.selling)}</span></div><div><span>Total investment (all-in before selling)</span><span>${$(r.project)}</span></div>
+ <div class="tot"><span>Estimated net profit</span><span class="${cls(r.net)}">${$(r.net)}</span></div></div>`}
+upd();
+</script></body></html>
