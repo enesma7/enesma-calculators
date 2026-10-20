@@ -48,20 +48,25 @@ input:focus,select:focus{border-color:var(--g2)}input:disabled{opacity:.45}
 </style></head><body><div class="wrap" id="wrap">
 <p class="eyebrow">ENESMA Realty · Seller Estimate</p><h1>Estimated Net Sheet</h1><p class="sub">Estimate a seller's net proceeds at closing. Results update as you type; blank fields count as $0.</p>
 <div class="lay"><div class="col" id="cards"></div><div class="card res" id="res"></div></div>
-<p class="fine"><b>Disclosure:</b> This calculator provides an estimate only, for informational purposes. It is not financial, tax, legal or lending advice and does not guarantee results. Actual figures will vary. Please consult your ENESMA agent before relying on these numbers. Escrow, title and payoff figures must be confirmed with escrow and the lender.</p></div><script>const G=[["Sale & commissions",[["price","Sale price","d",800000],["listPct","Listing agent comm.","p",3],["sellPct","Selling agent comm.","p",2],["prorate","County tax proration","d",325]]],
-["Title charges",[["owners","Owner's title policy","d",2262],["subEsc","Sub-escrow fee","d",68],["tWire","Title wire fee","d",30],["tMess","Title messenger fee","d",55],["tRec","Recording service fee","d",30],["xfer","County transfer tax","d",682],["half","1st half taxes","d",0]]],
-["Escrow & recording",[["escrow","Escrow fee","d",2925],["docs","Doc prep / demand fee","d",250],["eWire","Wire fee","d",100],["eMess","Overnight / messenger","d",75],["notary","Notary (grant deed)","d",150],["email","Email doc fee","d",100],["f593","593 processing fee","d",0],["lien","Release of lien","d",50]]],
+<p class="fine"><b>Disclosure:</b> This calculator provides an estimate only, for informational purposes. It is not financial, tax, legal or lending advice and does not guarantee results. Actual figures will vary. Please consult your ENESMA agent before relying on these numbers. Escrow, title and payoff figures must be confirmed with escrow and the lender.</p></div><script>const G=[["Sale & commissions",[["price","Sale price","d",800000],["listPct","Listing agent comm.","p",3],["sellPct","Selling agent comm.","p",2],["prorate","County tax proration","d",""]]],
+["Title charges",[["owners","Owner's title policy","d",0],["subEsc","Sub-escrow fee","d",68],["tWire","Title wire fee","d",30],["tMess","Title messenger fee","d",55],["tRec","Recording service fee","d",30],["xfer","County transfer tax","d",682],["half","1st half taxes","d",0]]],
+["Escrow & recording",[["escrow","Escrow fee","d",0],["docs","Doc prep / demand fee","d",250],["eWire","Wire fee","d",100],["eMess","Overnight / messenger","d",75],["notary","Notary (grant deed)","d",150],["email","Email doc fee","d",100],["f593","593 processing fee","d",0],["lien","Release of lien","d",50]]],
 ["Payoffs & disbursements",[["pay1","1st loan payoff","d",230000],["pay2","2nd loan payoff","d",0],["nhd","Natural hazard report","d",99],["warr","Home warranty","d",0],["tc","Transaction coordinator","d",400],["comp","Compliance fee","d",250],["risk","Risk management","d",99],["termite","Termite report","d",0],["ftb","FTB withholding","d",0]]]];
 const V={};G.forEach(g=>g[1].forEach(f=>V[f[0]]=f[3]));
 const n=v=>{v=parseFloat(v);return isFinite(v)?v:0},$=v=>(v<-.5?"−$":"$")+Math.abs(Math.round(v)).toLocaleString("en-US");
 let mobile=false;
-const field=(k,l,t)=>`<label><span class="t">${l}</span><span class="box ${t}">${t==="d"?'<i class="pre">$</i>':'<i class="suf">%</i>'}<input type="number" step="any" min="0" inputmode="decimal" value="${V[k]}" placeholder="0" data-k="${k}" aria-label="${l}"></span></label>`;
+const AUTO={escrow:p=>350+3.5*p/1000,owners:p=>2.75*p/1000},HINT={escrow:"auto: $350 + $3.50/1k",owners:"auto: $2.75/1k"},man={};
+const r2=v=>Math.round(v*100)/100;Object.keys(AUTO).forEach(k=>V[k]=r2(AUTO[k](n(V.price))));
+const field=(k,l,t)=>`<label><span class="t">${l}${HINT[k]?`<small class="hint" data-h="${k}" style="display:block;font-size:11px;opacity:.6;font-weight:400">${HINT[k]}</small>`:""}</span><span class="box ${t}">${t==="d"?'<i class="pre">$</i>':'<i class="suf">%</i>'}<input type="number" step="any" min="0" inputmode="decimal" value="${V[k]}" placeholder="0" data-k="${k}" aria-label="${l}"></span></label>`;
 cards.innerHTML=`<div class="card"><label class="tog" style="flex-direction:row"><span>Mobile home<small>Adds $300 593 processing fee, removes title insurance</small></span><span class="sw"><input type="checkbox" id="mh" aria-label="Mobile home"><b></b></span></label></div>`+
  G.map((g,i)=>`<div class="card"><h2>${g[0]}<span id="t${i}"></span></h2><div class="f">${g[1].map(f=>field(...f)).join("")}</div></div>`).join("");
 const inp=k=>document.querySelector(`[data-k=${k}]`);
-document.querySelectorAll("input[data-k]").forEach(e=>e.addEventListener("input",()=>{V[e.dataset.k]=e.value;upd()}));
+document.querySelectorAll("input[data-k]").forEach(e=>e.addEventListener("input",()=>{const k=e.dataset.k;V[k]=e.value;
+ if(AUTO[k]){man[k]=e.value!=="";if(!man[k])V[k]=r2(AUTO[k](n(V.price)));hint(k)}
+ if(k==="price")Object.keys(AUTO).forEach(a=>{if(!man[a]){V[a]=r2(AUTO[a](n(V.price)));if(!(a==="owners"&&mobile))inp(a).value=V[a]}});upd()}));
 mh.addEventListener("change",()=>{mobile=mh.checked;inp("owners").disabled=mobile;inp("f593").disabled=mobile;
  inp("owners").value=mobile?0:V.owners;inp("f593").value=mobile?300:V.f593;upd()});
+function hint(k){const h=document.querySelector(`[data-h=${k}]`);if(h)h.textContent=man[k]?"manual override (clear for auto)":HINT[k]}
 function calc(){const g=k=>n(V[k]),r={};
  const owners=mobile?0:g("owners"),f593=mobile?300:g("f593");r.price=g("price");
  r.listC=r.price*g("listPct")/100;r.sellC=r.price*g("sellPct")/100;r.comm=r.listC+r.sellC;r.pror=g("prorate");
