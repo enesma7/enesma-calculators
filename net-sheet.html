@@ -55,14 +55,14 @@ input:focus,select:focus{border-color:var(--g2)}input:disabled{opacity:.45}
 const V={};G.forEach(g=>g[1].forEach(f=>V[f[0]]=f[3]));
 const n=v=>{v=parseFloat(v);return isFinite(v)?v:0},$=v=>(v<-.5?"−$":"$")+Math.abs(Math.round(v)).toLocaleString("en-US");
 let mobile=false;
-const AUTO={escrow:p=>350+3.5*p/1000,owners:p=>2.75*p/1000},HINT={escrow:"auto: $350 + $3.50/1k",owners:"auto: $2.75/1k"},man={};
+const AUTO={escrow:p=>350+3.5*p/1000,owners:p=>250+2.5*p/1000},HINT={escrow:"auto: $350 + $3.50/1k",owners:"auto: $250 + $2.50/1k"},man={};
 const r2=v=>Math.round(v*100)/100;Object.keys(AUTO).forEach(k=>V[k]=r2(AUTO[k](n(V.price))));
 const field=(k,l,t)=>`<label><span class="t">${l}${HINT[k]?`<small class="hint" data-h="${k}" style="display:block;font-size:11px;opacity:.6;font-weight:400">${HINT[k]}</small>`:""}</span><span class="box ${t}">${t==="d"?'<i class="pre">$</i>':'<i class="suf">%</i>'}<input type="number" step="any" min="0" inputmode="decimal" value="${V[k]}" placeholder="0" data-k="${k}" aria-label="${l}"></span></label>`;
 cards.innerHTML=`<div class="card"><label class="tog" style="flex-direction:row"><span>Mobile home<small>Adds $300 593 processing fee, removes title insurance</small></span><span class="sw"><input type="checkbox" id="mh" aria-label="Mobile home"><b></b></span></label></div>`+
  G.map((g,i)=>`<div class="card"><h2>${g[0]}<span id="t${i}"></span></h2><div class="f">${g[1].map(f=>field(...f)).join("")}</div></div>`).join("");
 const inp=k=>document.querySelector(`[data-k=${k}]`);
 document.querySelectorAll("input[data-k]").forEach(e=>e.addEventListener("input",()=>{const k=e.dataset.k;V[k]=e.value;
- if(AUTO[k]){man[k]=e.value!=="";if(!man[k])V[k]=r2(AUTO[k](n(V.price)));hint(k)}
+ if(AUTO[k]){man[k]=e.value!=="";if(!man[k]){V[k]=r2(AUTO[k](n(V.price)));e.value=V[k]}hint(k)}
  if(k==="price")Object.keys(AUTO).forEach(a=>{if(!man[a]){V[a]=r2(AUTO[a](n(V.price)));if(!(a==="owners"&&mobile))inp(a).value=V[a]}});upd()}));
 mh.addEventListener("change",()=>{mobile=mh.checked;inp("owners").disabled=mobile;inp("f593").disabled=mobile;
  inp("owners").value=mobile?0:V.owners;inp("f593").value=mobile?300:V.f593;upd()});
