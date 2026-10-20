@@ -81,7 +81,7 @@ cards.innerHTML=CARDS.map((c,i)=>`<div class="card"><h2>${c[0]}<span id="t${i}">
 document.querySelectorAll("input[data-k]").forEach(e=>e.addEventListener("input",()=>{V[e.dataset.k]=e.value;upd()}));
 const COL={price:"#5a5a66",buying:"#8a8a93",rep:"#3b3b47",holding:"#b9b2a0",selling:"#6f6a5c"};
 function upd(){const r=calc(),neg=r.net<0,cls=v=>v<0?"neg-t":"";
- const ST=r.net<0?{c:"#EF0207",t:"Loses money"}:(r.pm>=.1?{c:"#3ECF8E",t:"Good deal · "+pc(r.pm)+" of ARV"}:(r.pm>=.05?{c:"#F2C94C",t:"Thin margin · "+pc(r.pm)+" of ARV"}:{c:"#EF0207",t:"Too thin · "+pc(r.pm)+" of ARV"}));
+ const ST=r.net<0?{c:"#EF0207",t:"Loses money"}:(r.price>r.arv*.8?{c:"#EF0207",t:"Price over 80% of ARV"}:(r.net>=50000?{c:"#3ECF8E",t:"Good deal · "+$(r.net)+" profit"}:(r.net>=25000?{c:"#F2C94C",t:"Thin margin · "+$(r.net)+" profit"}:{c:"#EF0207",t:"Too thin · under $25,000 profit"})));
  for(const k in sub){const el=document.getElementById("c_"+k);if(el)el.innerHTML=sub[k](r)}
  t0.innerHTML=`Spread <b>${$(r.arv-r.price-r.rep)}</b>`;t1.innerHTML=`Interest <b>${$(r.int+r.rehabInt)}</b>`;t2.innerHTML=`Total <b>${$(r.buying)}</b>`;t3.innerHTML=`Total <b>${$(r.holding)}</b>`;t4.innerHTML=`Total <b>${$(r.selling)}</b>`;
  const tot=Math.max(1,r.price+r.buying+r.rep+r.holding+r.selling+Math.max(0,r.net)),w=v=>Math.max(0,v)/tot*100;
