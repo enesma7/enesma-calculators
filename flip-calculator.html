@@ -168,11 +168,11 @@ async function run(kind,btn){const w=isIOS?window.open("","_blank"):null;if(w)w.
  catch(e){if(w)w.close();alert("Sorry, the report could not be created. Please check your connection and try again.");throw e}
  finally{if(btn){btn.disabled=false;btn.textContent=old}}}
 window.enesmaReport={run,render,build};
-const css=document.createElement("style");css.textContent=`.dl{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin:16px auto 4px}
-.dl button{appearance:none;border:0;cursor:pointer;border-radius:99px;padding:12px 28px;background:var(--gold);color:var(--blk);font:700 13px Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+const css=document.createElement("style");css.textContent=`.dl{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:nowrap;margin:16px auto 4px}
+.dl button{appearance:none;border:0;cursor:pointer;border-radius:99px;padding:12px 24px;background:var(--gold);color:var(--blk);font:700 12.5px Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
 .dl button:hover{box-shadow:0 8px 24px rgba(213,190,135,.3)}.dl button:focus-visible{outline:2px solid var(--g1);outline-offset:3px}.dl button:disabled{opacity:.6;cursor:wait}
-.dl button.alt{background:none;border:1px solid var(--g2);color:var(--g1);padding:11px 20px;font-size:11.5px}`;document.head.appendChild(css);
-const box=document.createElement("div");box.className="dl";box.innerHTML=`<button type="button" id="dlPdf">Download Report</button><button type="button" class="alt" id="dlJpg">Save as Image</button>`;
+@media(max-width:400px){.dl button{padding:12px 16px;font-size:11.5px;letter-spacing:.08em}}`;document.head.appendChild(css);
+const box=document.createElement("div");box.className="dl";box.innerHTML=`<button type="button" id="dlPdf">Download PDF</button><button type="button" id="dlJpg">Download JPG</button>`;
 document.getElementById("wrap").appendChild(box);
 dlPdf.addEventListener("click",e=>run("pdf",e.currentTarget).catch(console.error));dlJpg.addEventListener("click",e=>run("jpg",e.currentTarget).catch(console.error));
 })();
