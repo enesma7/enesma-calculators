@@ -68,7 +68,7 @@ function calc(){const g=k=>n(V[k]),r={};
  r.buying=r.points+r.taxCredit+r.buyClose+r.buyComm;r.holding=r.int+r.rehabInt+r.tax+r.ins+r.misc+r.mkt;
  r.selling=r.listComm+r.sellComm+r.sellClose+r.credits+r.sellMisc;r.project=price+r.buying+rep+r.holding;r.net=arv-r.project-r.selling;
  r.cash=r.down+r.points+r.taxCredit+r.buyClose+r.buyComm+rep+r.int+r.misc;
- r.coc=r.cash>0?r.net/r.cash:NaN;r.roi=r.project>0?r.net/r.project:NaN;r.mao=arv*.7-rep;r.arv=arv;r.price=price;r.mo=mo;return r}
+ r.coc=r.cash>0?r.net/r.cash:NaN;r.roi=r.project>0?r.net/r.project:NaN;r.mao=arv*.8-rep;r.pm=arv>0?r.net/arv:NaN;r.arv=arv;r.price=price;r.mo=mo;return r}
 const MO=r=>+r.mo.toFixed(2)+" mo",OP="of price",OS="of sale";
 const sub={arv:()=>"<em>after repairs</em>",price:()=>"<em>contract price</em>",repairs:()=>"<em>rehab budget</em>",months:()=>"<em>to finish &amp; sell</em>",
  loanPct:r=>`${$(r.loan)} <em>· down ${$(r.down)}</em>`,rate:r=>`${$(r.int)} <em>· ${MO(r)}</em>`,points:r=>`${$(r.points)} <em>· ${OS}</em>`,rehabRate:r=>`${$(r.rehabInt)} <em>· 0% = cash</em>`,
@@ -81,6 +81,7 @@ cards.innerHTML=CARDS.map((c,i)=>`<div class="card"><h2>${c[0]}<span id="t${i}">
 document.querySelectorAll("input[data-k]").forEach(e=>e.addEventListener("input",()=>{V[e.dataset.k]=e.value;upd()}));
 const COL={price:"#5a5a66",buying:"#8a8a93",rep:"#3b3b47",holding:"#b9b2a0",selling:"#6f6a5c"};
 function upd(){const r=calc(),neg=r.net<0,cls=v=>v<0?"neg-t":"";
+ const ST=r.net<0?{c:"#EF0207",t:"Loses money"}:(r.pm>=.1?{c:"#3ECF8E",t:"Good deal · "+pc(r.pm)+" of ARV"}:{c:"#F2C94C",t:"Thin margin · "+pc(r.pm)+" of ARV"});
  for(const k in sub){const el=document.getElementById("c_"+k);if(el)el.innerHTML=sub[k](r)}
  t0.innerHTML=`Spread <b>${$(r.arv-r.price-r.rep)}</b>`;t1.innerHTML=`Interest <b>${$(r.int+r.rehabInt)}</b>`;t2.innerHTML=`Total <b>${$(r.buying)}</b>`;t3.innerHTML=`Total <b>${$(r.holding)}</b>`;t4.innerHTML=`Total <b>${$(r.selling)}</b>`;
  const tot=Math.max(1,r.price+r.buying+r.rep+r.holding+r.selling+Math.max(0,r.net)),w=v=>Math.max(0,v)/tot*100;
@@ -89,7 +90,7 @@ function upd(){const r=calc(),neg=r.net<0,cls=v=>v<0?"neg-t":"";
  <div class="kpis"><div class="kpi"><div class="k">Cash needed</div><div class="v">${$(r.cash)}</div><div class="s">Out of pocket</div></div>
  <div class="kpi"><div class="k">Cash-on-cash</div><div class="v ${cls(r.coc)}">${pc(r.coc,0)}</div><div class="s">Profit ÷ cash needed</div></div>
  <div class="kpi"><div class="k">ROI on total cost</div><div class="v ${cls(r.roi)}">${pc(r.roi)}</div><div class="s">Profit ÷ all-in cost</div></div>
- <div class="kpi"><div class="k">70% rule max offer</div><div class="v">${$(r.mao)}</div><div class="s ${r.price>r.mao?"neg-t":""}">${r.price<=r.mao?$(r.mao-r.price)+" under guideline":$(r.price-r.mao)+" over guideline"}</div></div></div>
+ <div class="kpi" style="border-color:${ST.c}66"><div class="k">Max Offer (80% rule)</div><div class="v" style="color:${ST.c}">${$(r.mao)}</div><div class="s">${r.price<=r.mao?$(r.mao-r.price)+" under max offer":$(r.price-r.mao)+" over max offer"} · <b style="color:${ST.c};font-weight:600">${ST.t}</b></div></div></div></div>
  <div class="stack">${seg.map(s=>`<div style="width:${w(s[1])}%;background:${s[2]}"></div>`).join("")}</div>
  <div class="legend">${seg.map(s=>`<span><i style="background:${s[2]}"></i>${s[0]} ${$(s[1])}</span>`).join("")}</div>
  <div class="tbl"><div class="h"><span>Sale price (ARV)</span><span>${$(r.arv)}</span></div>
