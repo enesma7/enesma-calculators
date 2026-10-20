@@ -62,8 +62,9 @@ cards.innerHTML=`<div class="card"><label class="tog" style="flex-direction:row"
  G.map((g,i)=>`<div class="card"><h2>${g[0]}<span id="t${i}"></span></h2><div class="f">${g[1].map(f=>field(...f)).join("")}</div></div>`).join("");
 const inp=k=>document.querySelector(`[data-k=${k}]`);
 document.querySelectorAll("input[data-k]").forEach(e=>e.addEventListener("input",()=>{const k=e.dataset.k;V[k]=e.value;
- if(AUTO[k]){man[k]=e.value!=="";if(!man[k]){V[k]=r2(AUTO[k](n(V.price)));e.value=V[k]}hint(k)}
+ if(AUTO[k]){man[k]=e.value!=="";if(!man[k])V[k]=r2(AUTO[k](n(V.price)));hint(k)}
  if(k==="price")Object.keys(AUTO).forEach(a=>{if(!man[a]){V[a]=r2(AUTO[a](n(V.price)));if(!(a==="owners"&&mobile))inp(a).value=V[a]}});upd()}));
+Object.keys(AUTO).forEach(k=>inp(k).addEventListener("blur",e=>{if(e.target.value===""&&!e.target.disabled){e.target.value=V[k]}}));
 mh.addEventListener("change",()=>{mobile=mh.checked;inp("owners").disabled=mobile;inp("f593").disabled=mobile;
  inp("owners").value=mobile?0:V.owners;inp("f593").value=mobile?300:V.f593;upd()});
 function hint(k){const h=document.querySelector(`[data-h=${k}]`);if(h)h.textContent=man[k]?"manual override (clear for auto)":HINT[k]}
