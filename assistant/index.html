@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Ask My Assistant | ENESMA Realty</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000007;--white:#FBFBFB;--gold:linear-gradient(135deg,#EAD59E,#D5BE87);--red:linear-gradient(135deg,#EF0207,#9A0007);--line:rgba(0,0,7,.12);--mute:rgba(0,0,7,.6)}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--white);color:var(--black);font:15px/1.55 Inter,system-ui,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 24px 22px}
+h2{font:700 28px/1.2 "Playfair Display",Georgia,serif}
+h3{font:600 20px/1.2 "Playfair Display",Georgia,serif}
+.rule{height:3px;width:56px;background:var(--gold);border-radius:2px;margin:10px 0 18px}
+.sub{color:var(--mute);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:start}
+.card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 6px 24px rgba(0,0,7,.05)}
+label{display:block;font-weight:600;font-size:13px;letter-spacing:.02em;margin-bottom:6px}
+input,textarea{width:100%;font:inherit;color:var(--black);background:var(--white);border:1px solid var(--line);border-radius:10px;padding:11px 13px;outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,textarea:focus{border-color:#D5BE87;box-shadow:0 0 0 3px rgba(234,213,158,.45)}
+textarea{height:168px;resize:none}
+.row{display:flex;gap:10px}.row input{flex:1}
+.btn{border:0;border-radius:10px;padding:11px 20px;font:600 14px Inter,sans-serif;cursor:pointer;white-space:nowrap}
+.btn-dark{background:var(--black);color:var(--white)}
+.btn-red{background:var(--red);color:var(--white);box-shadow:0 4px 14px rgba(154,0,7,.25)}
+.btn:disabled{opacity:.5;cursor:default}
+.who{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:14px}
+.link{background:none;border:0;font:500 13px Inter;color:#9A0007;cursor:pointer;text-decoration:underline}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:12px}
+.msg{font-size:13px;color:var(--mute)}
+.note{margin-top:14px;font-size:12.5px;color:var(--mute);padding-left:10px;border-left:3px solid #D5BE87}
+.note a{color:var(--black)}
+.feedhead{display:flex;justify-content:space-between;align-items:baseline}
+.feed{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.item{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.item .top{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--mute);margin-bottom:4px}
+.item .q{font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item .a{margin-top:8px;padding:8px 10px;background:var(--white);border-radius:8px;font-size:13.5px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.item.open .q,.item.open .a{-webkit-line-clamp:unset}
+.refs{margin-top:6px;font-size:12px;display:flex;flex-wrap:wrap;gap:3px 10px;align-items:baseline}.refs b{font-weight:600;color:var(--mute)}.refs a{color:#9A0007}
+.disc{margin-top:6px;font-size:10.5px;line-height:1.4;color:rgba(0,0,7,.45)}
+.pill{font:600 11px Inter;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.p-new{background:var(--white);color:var(--black);border:1px solid var(--black)}
+.p-prog{background:var(--white);color:var(--black);border:1px solid #D5BE87}
+.p-done{background:var(--gold);color:var(--black);border:1px solid #D5BE87}
+.err{color:#EF0207}
+.ico{width:34px;height:34px;border-radius:50%;background:var(--red);display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-right:10px}
+.pinrow{display:grid;grid-template-columns:1fr 110px;gap:10px}
+.chips{gap:6px 14px}.chip{cursor:pointer;border:0;background:none;padding:2px 0;font:500 13px Inter;color:var(--black);text-decoration:underline;text-decoration-color:#D5BE87;text-underline-offset:3px;border-radius:0}.chip:hover{background:none;color:#9A0007}
+.empty{color:var(--mute);font-size:14px;padding:26px 6px;text-align:center}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px;color:var(--mute)}
+.chips-wrap{margin-top:22px}
+.chips-title{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.demo{font-size:11px;color:var(--mute);margin-top:14px;text-align:right}
+.hidden{display:none!important}
+@media (max-width:760px){
+ .wrap{padding:18px 14px}.grid{grid-template-columns:1fr;gap:16px}
+ h2{font-size:23px}.card{padding:16px}textarea{height:120px}
+ .pinrow{grid-template-columns:1fr 96px}
+}
+</style></head><body>
+<div class="wrap" id="app">
+  <h2><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="#FBFBFB"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span>Ask My Assistant</h2><div class="rule"></div>
+  <p class="sub">Marketing, Contracts, Showings, CRM - Any Time</p>
+  <div class="grid">
+    <div class="card">
+      <div id="stepName">
+        <label for="name">Agent Name</label>
+        <div class="pinrow"><input id="name" autocomplete="name" placeholder="First and last name"><input id="pin" inputmode="numeric" pattern="[0-9]*" maxlength="4" type="password" placeholder="4-digit PIN" aria-label="4-digit PIN"></div>
+        <div class="actions"><p class="msg" id="nmsg">Use the same name and PIN each time to see your requests.</p><button class="btn btn-dark" id="cont">Continue</button></div>
+      </div>
+      <div id="stepReq" class="hidden">
+        <div class="who"><span>Requesting as <b id="whoName"></b></span><button class="link" id="notYou">Not you?</button></div>
+        <label for="req">Request</label>
+        <textarea id="req" maxlength="4000" placeholder="Describe what you need: property, client, deadline, details…"></textarea>
+        <p class="disc">Disclaimer: Responses are AI-generated for general informational purposes only and are not legal, tax, or financial advice. ENESMA Realty is not responsible for errors in legal guidance, marketing materials, or emails produced by this assistant. Agents must independently verify all information with official sources and consult the broker or an attorney before advising clients.</p>
+        <div class="actions"><span class="msg" id="msg"></span><button class="btn btn-red" id="submit">Submit Request</button></div>
+      </div>
+      <p class="note">Legal and compliance answers include references to <a href="https://www.nar.realtor" target="_blank" rel="noopener">N.A.R.</a>, <a href="https://www.car.org" target="_blank" rel="noopener">C.A.R.</a> and <a href="https://www.crmls.org" target="_blank" rel="noopener">CRMLS</a>.</p>
+    </div>
+    <div class="card hidden" id="feedCard">
+      <div class="feedhead"><h3>My Requests</h3><button class="link" id="refresh">Refresh</button></div>
+      <div class="feed" id="feed"></div>
+      <div class="pager hidden" id="pager"><button class="link" id="prev">&larr; Newer</button><span id="pg"></span><button class="link" id="next">Older &rarr;</button></div>
+    </div>
+  </div>
+  <div class="chips-wrap"><div class="chips-title">Recommended Actions</div><div class="chips" id="chips"></div></div>
+  <div class="demo hidden" id="demo">Demo mode: requests are saved in this browser only.</div>
+</div>
+<script>
+/* ===== CONFIG: paste the Apps Script Web app URL into API_URL below. Empty = DEMO MODE (saves in this browser only) ===== */
+const CONFIG = {
+  API_URL: "",          // paste the Apps Script Web app URL (…/exec). Empty = demo/offline mode (localStorage)
+  POLL_MS: 60000
+};
+const SUGGESTIONS = ["Organize my email and delete all my spam emails","Schedule my showings","Prepare a contract or disclosure","Prepare a marketing piece","Hold me accountable to my business","Create a business plan","Change the status of a listing in CRMLS","Assist me with my CRM"];
+const $ = id => document.getElementById(id);
+const NAME_KEY = "enesma_agent_name", PIN_KEY = "enesma_agent_pin", DEMO_KEY = "enesma_demo_requests";
+const DEMO = !CONFIG.API_URL;
+const norm = s => String(s||"").trim().toLowerCase().replace(/\s+/g," ");
+const esc = s => String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let pinHash = "", agent = "", items = [], page = 0, timer = null;
+const PER = () => matchMedia("(max-width:760px)").matches ? 2 : 3;
+
+// ---- data layer ----
+function jsonp(url){return new Promise((res,rej)=>{const cb="enesmaCb"+Date.now()+Math.floor(Math.random()*1e4);const s=document.createElement("script");
+  const t=setTimeout(()=>{cleanup();rej(new Error("timeout"))},15000);function cleanup(){clearTimeout(t);delete window[cb];s.remove()}
+  window[cb]=d=>{cleanup();res(d)};s.onerror=()=>{cleanup();rej(new Error("network"))};s.src=url+(url.includes("?")?"&":"?")+"callback="+cb;document.body.appendChild(s)})}
+async function apiList(name){
+  if(DEMO){return JSON.parse(localStorage.getItem(DEMO_KEY)||"[]").filter(r=>r.agent_key===norm(name)&&r.pin_hash===pinHash).sort((a,b)=>b.timestamp<a.timestamp?-1:1)}
+  const d=await jsonp(CONFIG.API_URL+"?agent="+encodeURIComponent(name)+"&pin_hash="+pinHash); if(!d.ok) throw new Error(d.error); return d.requests}
+async function apiSubmit(name,text){
+  if(DEMO){const all=JSON.parse(localStorage.getItem(DEMO_KEY)||"[]");const now=new Date().toISOString();
+    const r={id:"R"+Date.now().toString(36).toUpperCase(),timestamp:now,agent_name:name,agent_key:norm(name),request:text,status:"New",answer:"",references:"",updated:now,pin_hash:pinHash};
+    all.push(r);localStorage.setItem(DEMO_KEY,JSON.stringify(all));return r.id}
+  const r=await fetch(CONFIG.API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({agent_name:name,request:text,pin_hash:pinHash})});
+  const d=await r.json(); if(!d.ok) throw new Error(d.error); return d.id}
+
+// ---- render ----
+function pill(s){const v=norm(s);return v==="done"?'<span class="pill p-done">Done</span>':v==="in progress"?'<span class="pill p-prog">In Progress</span>':'<span class="pill p-new">New</span>'}
+const SRC_LABEL={"nar.realtor":"N.A.R.","car.org":"C.A.R.","crmls.org":"CRMLS"};
+function refs(s){const seen=new Set();const links=String(s||"").split(/[\s,;]+/).filter(Boolean).map(u=>{const href=/^https?:\/\//i.test(u)?u:"https://"+u;let host;
+  try{host=new URL(href).hostname.replace(/^www\./,"")}catch(e){return""}if(seen.has(href))return"";seen.add(href);
+  const base=Object.keys(SRC_LABEL).find(d=>host===d||host.endsWith("."+d));const isRoot=/^https?:\/\/[^/]+\/?$/i.test(href);
+  const label=base?(isRoot?SRC_LABEL[base]:SRC_LABEL[base]+": "+decodeURIComponent(new URL(href).pathname).replace(/^\/|\/$/g,"").split("/").pop().replace(/[-_]/g," ")):host;
+  return `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(label)}</a>`}).filter(Boolean);
+  return links.length?'<div class="refs"><b>Sources:</b>'+links.join("")+"</div>":""}
+function fmt(ts){const d=new Date(ts);return isNaN(d)?"":d.toLocaleString([], {month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}
+function render(){
+  const per=PER(),pages=Math.max(1,Math.ceil(items.length/per));page=Math.min(page,pages-1);
+  $("feed").innerHTML=items.length?items.slice(page*per,page*per+per).map(r=>`<div class="item" onclick="this.classList.toggle('open')"><div class="top"><span>${fmt(r.timestamp)}</span>${pill(r.status)}</div><div class="q">${esc(r.request)}</div>${r.answer?`<div class="a">${esc(r.answer)}</div>`:""}${refs(r.references)}</div>`).join("")
+    :'<div class="empty">No requests yet. Your first one will appear here.</div>';
+  $("pager").classList.toggle("hidden",pages<2);$("pg").textContent=`${page+1} / ${pages}`;$("prev").disabled=page===0;$("next").disabled=page>=pages-1}
+async function load(){if(!agent)return;try{items=await apiList(agent);render()}catch(e){$("feed").innerHTML='<div class="empty err">Couldn’t load requests. Retrying shortly.</div>'}}
+
+// ---- flow ----
+async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+async function setAgent(n,pin){agent=n.trim();pinHash=agent?await sha(norm(agent)+":"+pin):"";if(agent)localStorage.setItem(PIN_KEY,pin);$("msg").textContent="";if(agent){localStorage.setItem(NAME_KEY,agent);$("whoName").textContent=agent}
+  $("stepName").classList.toggle("hidden",!!agent);$("stepReq").classList.toggle("hidden",!agent);$("feedCard").classList.toggle("hidden",!agent);
+  clearInterval(timer);if(agent){page=0;load();timer=setInterval(load,CONFIG.POLL_MS)}}
+$("cont").onclick=()=>{const n=$("name").value.trim(),p=$("pin").value.trim();if(n.length<2){$("name").focus();return}
+  if(!/^\d{4}$/.test(p)){$("nmsg").textContent="Please enter a 4-digit PIN.";$("nmsg").classList.add("err");$("pin").focus();return}$("nmsg").classList.remove("err");setAgent(n,p)};
+$("pin").onkeydown=e=>{if(e.key==="Enter")$("cont").click()};
+$("name").onkeydown=e=>{if(e.key==="Enter")$("pin").focus()};
+$("notYou").onclick=()=>{localStorage.removeItem(NAME_KEY);localStorage.removeItem(PIN_KEY);agent="";items=[];$("name").value="";$("pin").value="";setAgent("","");$("name").focus()};
+$("submit").onclick=async()=>{const t=$("req").value.trim();if(!t){$("req").focus();return}
+  $("submit").disabled=true;$("msg").textContent="Sending…";
+  try{const id=await apiSubmit(agent,t);$("req").value="";$("msg").textContent="Sent ✓ Ref "+id;page=0;await load()}
+  catch(e){$("msg").innerHTML='<span class="err">Couldn’t send. Please try again.</span>'}finally{$("submit").disabled=false}};
+$("refresh").onclick=load;$("prev").onclick=()=>{page--;render()};$("next").onclick=()=>{page++;render()};
+$("chips").innerHTML=SUGGESTIONS.map((s,i)=>`<button class="chip" data-i="${i}">${esc(s)}</button>`).join("");
+$("chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;$("req").value=SUGGESTIONS[b.dataset.i]+": ";if(!agent){$("name").focus()}else{$("req").focus()}};
+if(DEMO)$("demo").classList.remove("hidden");
+{const n=localStorage.getItem(NAME_KEY)||"",p=localStorage.getItem(PIN_KEY)||"";setAgent(/^\d{4}$/.test(p)?n:"",p)}
+</script></body></html>
