@@ -19,31 +19,46 @@ if(s){location.replace('https://agent.enesmarealty.com');}})();
 <style>
 :root{--g:linear-gradient(135deg,#EAD59E 0%,#D5BE87 100%)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#000007;color:#FBFBFB;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
-body{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 24px calc(140px + env(safe-area-inset-bottom))}
+html,body{height:100%;background:#000007;color:#FBFBFB;font-family:-apple-system,BlinkMacSystemFont,"Roboto","Helvetica Neue",Arial,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 140px}
 .emblem{width:96px;height:auto;margin-bottom:28px}
 h1{font-size:26px;font-weight:700;letter-spacing:.02em;margin-bottom:14px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
-p.ins{font-size:19px;line-height:1.5;max-width:320px}
-.share{display:inline-block;width:22px;height:26px;vertical-align:-5px;margin:0 3px}
+p.ins{font-size:19px;line-height:1.5;max-width:330px}
+.ic{display:inline-block;width:22px;height:26px;vertical-align:-5px;margin:0 3px}
 .rule{width:120px;height:1px;background:var(--g);margin:26px auto}
 a.cont{font-size:14px;color:#FBFBFB;opacity:.75;text-decoration:none;border-bottom:1px solid #D5BE87;padding-bottom:2px}
-.arrow{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);width:44px;height:90px;animation:bob 1.4s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,14px)}}
-@media (prefers-reduced-motion:reduce){.arrow{animation:none}}
+#install{display:none;margin:0 auto 22px;padding:12px 26px;border:0;border-radius:999px;background:var(--g);color:#000007;font-size:16px;font-weight:700;letter-spacing:.02em}
+.arrow{position:fixed;width:44px;height:90px}
+.ios .arrow{left:50%;bottom:calc(18px + env(safe-area-inset-bottom));margin-left:-22px;animation:down 1.4s ease-in-out infinite}
+.android .arrow{right:14px;top:8px;transform:rotate(180deg);animation:up 1.4s ease-in-out infinite}
+@keyframes down{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
+@keyframes up{0%,100%{transform:rotate(180deg) translateY(0)}50%{transform:rotate(180deg) translateY(14px)}}
+.ios .android-only,.android .ios-only{display:none}
+@media (prefers-reduced-motion:reduce){.arrow{animation:none!important}}
 </style>
 </head>
 <body>
 <img class="emblem" src="emblem-gold.png" alt="ENESMA emblem">
 <h1>Agent Hub</h1>
-<p class="ins">Tap Share
-<svg class="share" viewBox="0 0 22 26" aria-label="Share icon"><defs><linearGradient id="sg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="22" y2="26"><stop offset="0" stop-color="#EAD59E"/><stop offset="1" stop-color="#D5BE87"/></linearGradient></defs><g fill="none" stroke="url(#sg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v15"/><path d="M6 7l5-5 5 5"/><path d="M7 11H3v13h16V11h-4"/></g></svg>,
+<button id="install" type="button">Install Agent Hub</button>
+<p class="ins ios-only">Tap Share
+<svg class="ic" viewBox="0 0 22 26" aria-label="Share icon"><defs><linearGradient id="sg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="22" y2="26"><stop offset="0" stop-color="#EAD59E"/><stop offset="1" stop-color="#D5BE87"/></linearGradient></defs><g fill="none" stroke="url(#sg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v15"/><path d="M6 7l5-5 5 5"/><path d="M7 11H3v13h16V11h-4"/></g></svg>,
 then Add to Home Screen</p>
+<p class="ins android-only">Tap the menu
+<svg class="ic" viewBox="0 0 22 26" aria-label="Three-dot menu icon"><defs><linearGradient id="mg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="22" y2="26"><stop offset="0" stop-color="#EAD59E"/><stop offset="1" stop-color="#D5BE87"/></linearGradient></defs><g fill="url(#mg)"><circle cx="11" cy="5" r="2.4"/><circle cx="11" cy="13" r="2.4"/><circle cx="11" cy="21" r="2.4"/></g></svg>,
+then Add to Home screen or Install app</p>
 <div class="rule"></div>
 <a class="cont" id="cont" href="https://agent.enesmarealty.com">Continue to Agent Hub</a>
 <svg class="arrow" viewBox="0 0 44 90" aria-hidden="true"><defs><linearGradient id="ag" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="44" y2="90"><stop offset="0" stop-color="#EAD59E"/><stop offset="1" stop-color="#D5BE87"/></linearGradient></defs><g fill="none" stroke="url(#ag)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4v78"/><path d="M6 66l16 16 16-16"/></g></svg>
 <script>
-var ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-if(ios){document.getElementById('cont').style.display='none';}
+var ua=navigator.userAgent,p=new URLSearchParams(location.search).get('p');
+var isIOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var plat=(p==='ios'||p==='android')?p:(/Android/i.test(ua)?'android':'ios');
+document.body.className=plat;
+if(isIOS){document.getElementById('cont').style.display='none';}
+var dp;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;document.getElementById('install').style.display='block';});
+document.getElementById('install').addEventListener('click',function(){if(!dp)return;dp.prompt();dp.userChoice.finally(function(){dp=null;document.getElementById('install').style.display='none';});});
+window.addEventListener('appinstalled',function(){document.getElementById('install').style.display='none';});
 </script>
 </body>
 </html>
