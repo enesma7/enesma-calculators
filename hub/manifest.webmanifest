@@ -1,0 +1,14 @@
+{
+  "name": "Agent Hub",
+  "short_name": "Agent Hub",
+  "start_url": "/hub/?source=homescreen",
+  "scope": "/hub/",
+  "display": "standalone",
+  "background_color": "#000007",
+  "theme_color": "#000007",
+  "icons": [
+    {"src": "/hub/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"},
+    {"src": "/hub/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/hub/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"}
+  ]
+}

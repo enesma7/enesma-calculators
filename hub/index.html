@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>
+(function(){var s=(window.navigator.standalone===true)||(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches);
+if(s){location.replace('https://agent.enesmarealty.com');}})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agent Hub</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Agent Hub">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#000007">
+<link rel="manifest" href="/hub/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/hub/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/hub/icon-192.png">
+<style>
+:root{--g:linear-gradient(135deg,#EAD59E 0%,#D5BE87 100%)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000007;color:#FBFBFB;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 24px calc(140px + env(safe-area-inset-bottom))}
+.emblem{width:96px;height:auto;margin-bottom:28px}
+h1{font-size:26px;font-weight:700;letter-spacing:.02em;margin-bottom:14px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+p.ins{font-size:19px;line-height:1.5;max-width:320px}
+.share{display:inline-block;width:22px;height:26px;vertical-align:-5px;margin:0 3px}
+.rule{width:120px;height:1px;background:var(--g);margin:26px auto}
+a.cont{font-size:14px;color:#FBFBFB;opacity:.75;text-decoration:none;border-bottom:1px solid #D5BE87;padding-bottom:2px}
+.arrow{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);width:44px;height:90px;animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,14px)}}
+@media (prefers-reduced-motion:reduce){.arrow{animation:none}}
+</style>
+</head>
+<body>
+<img class="emblem" src="/hub/emblem-gold.png" alt="ENESMA emblem">
+<h1>Agent Hub</h1>
+<p class="ins">Tap Share
+<svg class="share" viewBox="0 0 22 26" aria-label="Share icon"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAD59E"/><stop offset="1" stop-color="#D5BE87"/></linearGradient></defs><g fill="none" stroke="url(#sg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v15"/><path d="M6 7l5-5 5 5"/><path d="M7 11H3v13h16V11h-4"/></g></svg>,
+then Add to Home Screen</p>
+<div class="rule"></div>
+<a class="cont" id="cont" href="https://agent.enesmarealty.com">Continue to Agent Hub</a>
+<svg class="arrow" viewBox="0 0 44 90" aria-hidden="true"><defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAD59E"/><stop offset="1" stop-color="#D5BE87"/></linearGradient></defs><g fill="none" stroke="url(#ag)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4v78"/><path d="M6 66l16 16 16-16"/></g></svg>
+<script>
+var ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+if(ios){document.getElementById('cont').style.display='none';}
+</script>
+</body>
+</html>
