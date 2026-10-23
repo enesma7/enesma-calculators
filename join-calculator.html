@@ -1,0 +1,126 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ENESMA Realty – Commission Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blk:#000007;--wht:#FBFBFB;--gold:linear-gradient(135deg,#EAD59E,#D5BE87);--g1:#EAD59E;--g2:#D5BE87;--mut:rgba(251,251,251,.6);--line:rgba(234,213,158,.3);--gl:linear-gradient(135deg,rgba(234,213,158,.45),rgba(213,190,135,.45))}
+*{box-sizing:border-box}body{margin:0;background:var(--blk);color:var(--wht);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:auto;padding:40px 20px}
+h1{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px}.sub{color:var(--mut);margin:0 0 28px;font-size:15px}
+.card{background:linear-gradient(var(--blk),var(--blk)) padding-box,var(--gl) border-box;border:1px solid transparent;border-radius:16px;padding:22px}
+.inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--mut);font-weight:500;min-width:0}
+input{width:100%;background:linear-gradient(var(--blk),var(--blk)) padding-box,var(--gl) border-box;border:1px solid transparent;color:var(--wht);border-radius:10px;padding:11px 12px;font:500 15px Inter,system-ui,sans-serif;outline:none}
+input:focus{background:linear-gradient(var(--blk),var(--blk)) padding-box,var(--gold) border-box}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.col h2{font-size:18px;margin:0 0 14px;font-weight:600}.fx{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--mut);font-weight:500}.fx b{display:flex;align-items:center;min-height:43px;padding:0 12px;border:1px dashed rgba(251,251,251,.25);border-radius:10px;background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent;font:600 15px Inter,system-ui,sans-serif}.fx b small{color:var(--mut);font-weight:500;font-size:12px;margin-left:6px}.lock{font-size:11px;color:var(--mut);margin-top:12px}.hrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}.hrow h2{margin:0}.seg{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);font-weight:500}.seg .opts{display:inline-flex;background:linear-gradient(var(--blk),var(--blk)) padding-box,var(--gl) border-box;border:1px solid transparent;border-radius:99px;padding:3px}.seg button{border:0;background:none;color:rgba(251,251,251,.85);font:600 12px Inter,system-ui,sans-serif;padding:6px 12px;border-radius:99px;cursor:pointer}.seg button.on{background:var(--gold);color:var(--blk)}.seg button:focus-visible{outline:2px solid var(--wht);outline-offset:1px}.col.en h2{background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+.col.en{background:linear-gradient(var(--blk),var(--blk)) padding-box,var(--gold) border-box}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+details{margin-top:16px;border-top:1px solid transparent;border-image:var(--gl) 1;padding-top:14px}
+summary{cursor:pointer;font-size:14px;font-weight:600;background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent;list-style:none;display:inline-block}summary::-webkit-details-marker{display:none}
+summary:before{content:"+ "}details[open] summary:before{content:"– "}
+details .f{margin-top:12px}.full{grid-column:1/-1}
+.res{margin-top:18px;font-size:13px;color:rgba(251,251,251,.85)}.res div{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid transparent;border-image:var(--gl) 1}
+.res .tot{color:var(--wht);font-weight:700;font-size:15px;border:0;padding-top:10px;border-image:none}.capinfo{background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:12px;margin-top:8px}
+.hero{text-align:center;margin:30px 0 18px}
+.head{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1.1;background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+.head.neutral{background:none;color:var(--wht);font-size:30px}
+.bars{margin:22px auto 0;max-width:720px;text-align:left}.bar{margin:12px 0}.bar .lbl{display:flex;justify-content:space-between;font-size:13px;color:rgba(251,251,251,.85);margin-bottom:6px}
+.track{height:14px;background:rgba(251,251,251,.08);border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:99px;background:rgba(251,251,251,.45);transition:width .4s}.fill.g{background:var(--gold)}
+.cta{display:inline-block;margin-top:26px;padding:15px 38px;border-radius:99px;background:var(--gold);color:var(--blk);font-weight:700;text-decoration:none;font-size:16px}
+.fine{color:rgba(251,251,251,.5);font-size:11px;line-height:1.5;margin-top:26px;text-align:center}
+@media(max-width:760px){.wrap{padding:24px 14px}.inputs,.cols{grid-template-columns:1fr}.head{font-size:32px}.head.neutral{font-size:22px}h1{font-size:23px}}
+
+/* --- Seamless Google Sites embed (light, transparent, no cards) --- */
+:root{--mut:rgba(0,0,7,.62);--gl:linear-gradient(135deg,#EAD59E,#D5BE87)}
+html,body{margin:0;padding:0;overflow:hidden;max-width:100%;background:transparent!important;color:var(--blk)}
+html.solo,html.solo body{overflow:auto}
+.wrap{width:100%;max-width:1120px;padding:4px 2px}
+.card,.col.en{background:transparent!important;border:0!important;border-radius:0;padding:0;box-shadow:none}
+.inputs{padding-bottom:18px;border-bottom:2px solid transparent;border-image:var(--gold) 1}
+.cols{gap:28px}
+input{background:linear-gradient(#fff,#fff) padding-box,var(--gold) border-box;border:1.5px solid transparent;color:var(--blk);max-width:100%}
+input:focus{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#D5BE87,#B89A5E) border-box;box-shadow:0 0 0 3px rgba(213,190,135,.25)}
+.fx b{border:0;background:var(--gold);-webkit-background-clip:border-box;background-clip:border-box;color:var(--blk)}
+.fx b small{color:rgba(0,0,7,.65)}
+.seg .opts{background:linear-gradient(#fff,#fff) padding-box,var(--gold) border-box}
+.seg button{color:rgba(0,0,7,.8)}.seg button.on{background:var(--gold);color:var(--blk)}.seg button:focus-visible{outline:2px solid var(--blk)}
+.col h2,.col.en h2{color:var(--blk);background:none;-webkit-background-clip:border-box;background-clip:border-box;padding-bottom:6px;border-bottom:3px solid transparent;border-image:var(--gold) 1;display:inline-block}
+summary{color:var(--blk);background:var(--gold) left bottom/100% 2px no-repeat;-webkit-background-clip:border-box;background-clip:border-box;padding-bottom:3px}
+.res{color:rgba(0,0,7,.85)}.res .tot{color:var(--blk)}
+.capinfo{color:var(--blk);background:none;-webkit-background-clip:border-box;background-clip:border-box;font-weight:600}
+.head{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--blk)}
+.head:after{content:"";display:block;width:96px;height:4px;border-radius:4px;margin:12px auto 0;background:var(--gold)}
+.head.neutral:after{display:none}.head.neutral{color:var(--blk)}
+.bar .lbl{color:rgba(0,0,7,.85)}.track{background:rgba(0,0,7,.07)}.fill{background:rgba(0,0,7,.35)}.fill.g{background:var(--gold)}
+.fine{color:rgba(0,0,7,.55);margin-top:18px}.lock{color:var(--mut)}
+.hero{margin:22px 0 10px}
+@media(max-width:760px){.wrap{padding:4px 2px}h1{font-size:21px}.sub{margin-bottom:16px;font-size:14px}.inputs{gap:10px}.f{gap:10px}.cols{gap:20px}.head{font-size:28px}.hero{margin:16px 0 6px}.fine{margin-top:12px}}
+</style></head><body><div class="wrap">
+<h1>See what you'd keep with ENESMA Realty</h1><p class="sub">Compare your current brokerage side by side. Every field is optional and blank means $0.</p>
+<div class="card inputs" id="glob"></div>
+<div class="cols"><div class="card col" id="c0"></div><div class="card col en" id="c1"></div></div>
+<div class="hero"><div class="head" id="head"></div>
+<div class="bars" id="bars"></div></div>
+<p class="fine">All figures are estimates for illustration only and are not a guarantee of earnings or an offer of terms. Actual commissions, fees, caps and benefits depend on your agreement, transactions and brokerage policies. Revenue share and stock awards are not guaranteed. Confirm all terms with ENESMA Realty before making decisions.</p>
+</div>
+<script>if(window.top===window.self)document.documentElement.classList.add("solo");
+/* ================================================================
+   ENESMA REALTY DEFAULTS. CONFIRMED BY ENRIQUE 2026-10-16.
+   Units: split = agent's % of GCI; cap, eoYear, annual, franCap, benefit = $/year;
+   monthly, desk, tech, marketing = $/month; txnFee, eoTxn, review, postCap = $/deal.
+   ================================================================ */
+const ENESMA = {
+  split: 80,        // agent keeps 80% until cap (confirmed by Enrique)
+  cap: 10000,       // annual cap (confirmed by Enrique)
+  monthly: 0,       // no monthly fees (confirmed by Enrique)
+  txnFee: 200,      // admin fee per transaction (confirmed by Enrique)
+  desk: 0, eoTxn: 0, eoYear: 0, tech: 0, review: 0,
+  franPct: 0, franCap: 0, annual: 0, marketing: 0, postCap: 0,
+  benefit: 0,       // revenue share / stock awards per year (EXAMPLE)
+  capNote: "Cap resets on your anniversary date"
+};
+const GLOBAL = {price: 600000, comm: 2.5, txns: 10};
+const CURRENT = {split: 80, cap: 21000, txnFee: 395, monthly: 50, plan: "split", flat: 700};
+
+const MAIN=[["split","Your split (%)"],["cap","Annual cap ($)"],["monthly","Monthly fee ($/mo)"],["txnFee","Transaction fee ($/deal)"]];
+const MAIN_FLAT=[["flat","Flat fee per transaction ($)"],["monthly","Monthly fee ($/mo)"],["txnFee","Transaction fee ($/deal)"]];
+const MORE=[["desk","Desk fee ($/mo)"],["eoTxn","E&O insurance ($/deal)"],["eoYear","E&O insurance ($/yr)"],["tech","Technology fee ($/mo)"],
+["review","Broker review / compliance ($/deal)"],["marketing","Marketing fee ($/mo)"],["franPct","Franchise / royalty (%)"],["franCap","Royalty cap ($/yr, 0 = none)"],
+["annual","Annual / membership fee ($/yr)"],["postCap","Post-cap transaction fee ($/deal)"],["benefit","Other annual benefit: rev share / stock ($/yr)"]];
+const B=[Object.assign({},CURRENT),Object.assign({},ENESMA)], G=Object.assign({},GLOBAL), NAMES=["Your current brokerage","ENESMA Realty"];
+const n=v=>{v=parseFloat(v);return isFinite(v)?v:0}, $=v=>(v<0?"−$":"$")+Math.abs(Math.round(v)).toLocaleString("en-US");
+const esc=s=>String(s??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+function calc(b){const g=n(G.price)*n(G.comm)/100,T=Math.max(0,Math.round(n(G.txns)));
+ const flat=b.plan==="flat",sp=(b.split===""||b.split==null)?100:n(b.split),cap=flat?0:n(b.cap),fc=n(b.franCap);
+ let split=0,fran=0,perDeal=0,post=0,capDeal=null,franDeal=null;
+ for(let i=1;i<=T;i++){const capped=cap>0&&split>=cap;let s=flat?n(b.flat):g*(100-sp)/100;if(cap>0)s=Math.min(s,Math.max(0,cap-split));split+=s;
+  if(cap>0&&capDeal===null&&split>=cap)capDeal=i;
+  let f=g*n(b.franPct)/100;if(fc>0)f=Math.min(f,Math.max(0,fc-fran));fran+=f;if(fc>0&&franDeal===null&&n(b.franPct)>0&&fran>=fc)franDeal=i;
+  perDeal+=n(b.txnFee)+n(b.eoTxn)+n(b.review);if(capped)post+=n(b.postCap)}
+ const rec=12*(n(b.monthly)+n(b.desk)+n(b.tech)+n(b.marketing))+n(b.eoYear)+n(b.annual),cost=split+fran+perDeal+post+rec,gci=g*T;
+ return{flat,gci,split,fran,perDeal,post,rec,cost,benefit:n(b.benefit),net:gci-cost+n(b.benefit),capDeal,franDeal,cap,fc,T}}
+function inp(path,k,l,v,type){return `<label class="${type==="text"?"full":""}">${l}<input type="${type||"number"}" ${type?"":'step="any" inputmode="decimal"'} value="${esc(v)}" placeholder="0" data-p="${path}" data-k="${k}"></label>`}
+const fx=(l,v,s)=>`<div class="fx">${l}<b>${v}${s?`<small>${s}</small>`:""}</b></div>`;
+function draw(){glob.innerHTML=inp("g","price","Average sale price ($)",G.price)+inp("g","comm","Your commission side (%)",G.comm)+inp("g","txns","Transactions per year",G.txns);
+ B.forEach((b,i)=>{const fl=i===0&&b.plan==="flat",tg=i===0?`<div class="seg" role="group" aria-label="Commission plan">Commission plan<span class="opts">${[["split","Split"],["flat","Flat fee"]].map(o=>`<button type="button" data-plan="${o[0]}" aria-pressed="${(b.plan||"split")===o[0]}" class="${(b.plan||"split")===o[0]?"on":""}">${o[1]}</button>`).join("")}</span></div>`:"";
+ document.getElementById("c"+i).innerHTML=`<div class="hrow"><h2>${NAMES[i]}</h2>${tg}</div>${i===1?`<div class="f">${inp(1,"split","Your split (%)",b.split)}${fx("Annual cap",$(ENESMA.cap))}${fx("Admin fee",$(ENESMA.txnFee),"per transaction")}${fx("Monthly fee",ENESMA.monthly?$(ENESMA.monthly):"$0","None")}</div><p class="lock">Cap, admin fee and monthly fee are fixed ENESMA terms.</p>`:`<div class="f">${(fl?MAIN_FLAT:MAIN).map(m=>inp(i,m[0],m[1],b[m[0]])).join("")}</div>
+ <details><summary>More fees</summary><div class="f">${MORE.map(m=>inp(i,m[0],m[1],b[m[0]])).join("")}${inp(i,"capNote","Cap reset note",b.capNote,"text")}</div></details>`}
+ <div class="res" id="r${i}"></div>`});
+ document.querySelectorAll("[data-plan]").forEach(e=>e.addEventListener("click",()=>{const o=document.getElementById("c0").querySelector("details").open;B[0].plan=e.dataset.plan;draw();document.getElementById("c0").querySelector("details").open=o;document.querySelector(`[data-plan=${e.dataset.plan}]`).focus()}));
+ document.querySelectorAll("input").forEach(e=>e.addEventListener("input",()=>{(e.dataset.p==="g"?G:B[+e.dataset.p])[e.dataset.k]=e.value;upd()}));upd()}
+function capTxt(r,b){let t=[];if(r.cap>0)t.push(r.capDeal?`Cap hit on deal #${r.capDeal} of ${r.T}`:`Cap not reached (${$(r.split)} of ${$(r.cap)})`);
+ if(r.fc>0&&n(b.franPct)>0)t.push(r.franDeal?`Royalty cap hit on deal #${r.franDeal}`:`Royalty cap not reached`);if(b.capNote)t.push(esc(b.capNote));return t.join(" · ")}
+function upd(){const R=B.map(calc);
+ R.forEach((r,i)=>{document.getElementById("r"+i).innerHTML=`<div><span>Gross commission (GCI)</span><span>${$(r.gci)}</span></div>
+ <div><span>${r.flat?"Flat broker fee":"Broker split"}</span><span>${$(r.split)}</span></div><div><span>Franchise / royalty</span><span>${$(r.fran)}</span></div>
+ <div><span>Per-deal fees (txn, E&amp;O, review)</span><span>${$(r.perDeal)}</span></div><div><span>Post-cap fees</span><span>${$(r.post)}</span></div>
+ <div><span>Monthly &amp; annual fees</span><span>${$(r.rec)}</span></div><div><span>Total costs</span><span>${$(r.cost)}</span></div>
+ <div><span>Other annual benefit</span><span>+${$(r.benefit)}</span></div><div class="tot"><span>You keep</span><span>${$(r.net)}</span></div>
+ <div class="capinfo" style="border:0">${capTxt(r,B[i])}</div>`});
+ const d=R[1].net-R[0].net,h=document.getElementById("head");
+ if(d>0){h.className="head";h.textContent=`You keep ${$(d)} more per year with ENESMA Realty`}
+ else{h.className="head neutral";h.textContent=d===0?"Both brokerages come out even with these numbers":"Your current setup keeps more with these numbers. Talk to us about your situation"}
+ const mx=Math.max(1,...R.map(r=>Math.max(r.net,0)));
+ bars.innerHTML=R.map((r,i)=>`<div class="bar"><div class="lbl"><span>${NAMES[i]}</span><span>${$(r.net)}</span></div><div class="track"><div class="fill ${i?"g":""}" style="width:${Math.max(0,r.net)/mx*100}%"></div></div></div>`).join("")}
+draw();
+</script></body></html>
