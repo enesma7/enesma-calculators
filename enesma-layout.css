@@ -1,0 +1,40 @@
+/* ENESMA shared layout tokens — match Agent Hub (hub/LAYOUT-SPEC.md).
+   Canonical URL: https://app.enesmarealty.com/shared/enesma-layout.css
+   Opt-in utilities only; this file does not reset page backgrounds or chrome. */
+@font-face {
+  font-family: Inter;
+  src: url("https://app.enesmarealty.com/transactions/assets/Inter.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+:root {
+  --black: #000007;
+  --white: #FBFBFB;
+  --k: #000007;
+  --w: #FBFBFB;
+  --gold-a: #EAD59E;
+  --gold-b: #D5BE87;
+  --gold: linear-gradient(90deg, #EAD59E, #D5BE87);
+  --gold-diag: linear-gradient(135deg, #EAD59E, #D5BE87);
+  --red-a: #EF0207;
+  --red-b: #9A0007;
+  --red: linear-gradient(90deg, #EF0207, #9A0007);
+  --red-diag: linear-gradient(135deg, #EF0207, #9A0007);
+  --muted: rgba(0, 0, 7, .62);
+  --soft: rgba(0, 0, 7, .55);
+  --line: rgba(0, 0, 7, .14);
+  --tint: rgba(0, 0, 7, .04);
+  --max: 1120px;
+  --radius: 8px;
+  --nav-h: 64px;
+  --gap: 22px;
+  --section-pad: 64px;
+  --font: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.enesma-wrap {
+  width: min(var(--max), calc(100% - 48px));
+  margin-inline: auto;
+}
+@media (max-width: 880px) {
+  .enesma-wrap { width: min(var(--max), calc(100% - 32px)); }
+}

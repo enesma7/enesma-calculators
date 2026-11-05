@@ -1,12 +1,13 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ENESMA Realty – Commission Calculator</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="enesma-layout.css?v=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--blk:#000007;--wht:#FBFBFB;--gold:linear-gradient(135deg,#EAD59E,#D5BE87);--g1:#EAD59E;--g2:#D5BE87;--mut:rgba(251,251,251,.6);--line:rgba(234,213,158,.3);--gl:linear-gradient(135deg,rgba(234,213,158,.45),rgba(213,190,135,.45))}
 *{box-sizing:border-box}body{margin:0;background:var(--blk);color:var(--wht);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1120px;margin:auto;padding:40px 20px}
 h1{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px}.sub{color:var(--mut);margin:0 0 28px;font-size:15px}
-.card{background:linear-gradient(var(--blk),var(--blk)) padding-box,var(--gl) border-box;border:1px solid transparent;border-radius:16px;padding:22px}
+.card{background:linear-gradient(var(--blk),var(--blk)) padding-box,var(--gl) border-box;border:1px solid transparent;border-radius:8px;padding:22px}
 .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
 label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--mut);font-weight:500;min-width:0}
 input{width:100%;background:linear-gradient(var(--blk),var(--blk)) padding-box,var(--gl) border-box;border:1px solid transparent;color:var(--wht);border-radius:10px;padding:11px 12px;font:500 15px Inter,system-ui,sans-serif;outline:none}
@@ -38,11 +39,11 @@ html.solo,html.solo body{overflow:auto}
 .card,.col.en{background:transparent!important;border:0!important;border-radius:0;padding:0;box-shadow:none}
 .inputs{padding-bottom:18px;border-bottom:2px solid transparent;border-image:var(--gold) 1}
 .cols{gap:28px}
-input{background:linear-gradient(#fff,#fff) padding-box,var(--gold) border-box;border:1.5px solid transparent;color:var(--blk);max-width:100%}
-input:focus{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#D5BE87,#B89A5E) border-box;box-shadow:0 0 0 3px rgba(213,190,135,.25)}
+input{background:linear-gradient(#FBFBFB,#FBFBFB) padding-box,var(--gold) border-box;border:1.5px solid transparent;color:var(--blk);max-width:100%}
+input:focus{background:linear-gradient(#FBFBFB,#FBFBFB) padding-box,linear-gradient(135deg,#D5BE87,#D5BE87) border-box;box-shadow:0 0 0 3px rgba(213,190,135,.25)}
 .fx b{border:0;background:var(--gold);-webkit-background-clip:border-box;background-clip:border-box;color:var(--blk)}
 .fx b small{color:rgba(0,0,7,.65)}
-.seg .opts{background:linear-gradient(#fff,#fff) padding-box,var(--gold) border-box}
+.seg .opts{background:linear-gradient(#FBFBFB,#FBFBFB) padding-box,var(--gold) border-box}
 .seg button{color:rgba(0,0,7,.8)}.seg button.on{background:var(--gold);color:var(--blk)}.seg button:focus-visible{outline:2px solid var(--blk)}
 .col h2,.col.en h2{color:var(--blk);background:none;-webkit-background-clip:border-box;background-clip:border-box;padding-bottom:6px;border-bottom:3px solid transparent;border-image:var(--gold) 1;display:inline-block}
 summary{color:var(--blk);background:var(--gold) left bottom/100% 2px no-repeat;-webkit-background-clip:border-box;background-clip:border-box;padding-bottom:3px}
