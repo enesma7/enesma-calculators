@@ -119,16 +119,14 @@
       }
     }
 
-    function ensureMinDown() {
-      var min = M.minDownPct(V.loanType);
+    function applyProgramDown() {
+      var defaults = { conventional: 20, fha: 3.5, va: 0 };
+      var pct = defaults[V.loanType];
       var p = price();
-      var pct = p ? num(V.down) / p * 100 : num(V.downPct);
-      if (pct + 1e-6 < min) {
-        V.downPct = min;
-        V.down = Math.round(p * min / 100);
-        q("down").value = V.down;
-        q("downPct").value = V.downPct;
-      }
+      V.downPct = pct;
+      V.down = Math.round(p * pct / 100);
+      q("down").value = V.down;
+      q("downPct").value = V.downPct;
     }
 
     function syncPmiDefault() {
@@ -318,14 +316,14 @@
 
     document.getElementById("loanType").addEventListener("click", function (e) {
       var b = e.target.closest("button");
-      if (!b) return;
+      if (!b || b.dataset.type === V.loanType) return;
       V.loanType = b.dataset.type;
       document.getElementById("loanType").querySelectorAll("button").forEach(function (x) {
         var on = x === b;
         x.classList.toggle("on", on);
         x.setAttribute("aria-pressed", on ? "true" : "false");
       });
-      ensureMinDown();
+      applyProgramDown();
       syncPmiDefault();
       applyRate();
       upd();
